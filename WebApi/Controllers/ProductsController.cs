@@ -59,7 +59,7 @@ public class ProductsController : ControllerBase
         return Ok(product);
     }
 
-    [HttpDelete("{id")]
+    [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
         var product = _products.Find(x => x.Id == id);
