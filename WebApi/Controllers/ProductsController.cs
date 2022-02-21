@@ -11,8 +11,8 @@ public class ProductsController : ControllerBase
 {
     private List<Product> _products = new List<Product>
     {
-        new Product { Id = 1, Name = "Milo" },
-        new Product { Id = 2, Name = "Tim Tams" }
+        new Product { id = 1, name = "Milo" },
+        new Product { id = 2, name = "Tim Tams" }
     };
 
     [HttpGet]
@@ -24,7 +24,7 @@ public class ProductsController : ControllerBase
     [HttpGet("{id}")]
     public IActionResult GetById(int id)
     {
-        var product = _products.Find(x => x.Id == id);
+        var product = _products.Find(x => x.id == id);
         if (product == null)
             return NotFound();
 
@@ -41,7 +41,7 @@ public class ProductsController : ControllerBase
     [HttpGet("{name}")]
     public IActionResult GetByName(string name)
     {
-        var product = _products.Find(x => x.Name == name);
+        var product = _products.Find(x => x.name == name);
         if (product == null)
             return NotFound();
 
@@ -51,7 +51,7 @@ public class ProductsController : ControllerBase
     [HttpPatch("{id}&{patch}")]
     public IActionResult Patch(int id, JsonPatchDocument<Product> patch)
     {
-        var product = _products.Find(x => x.Id == id);
+        var product = _products.Find(x => x.id == id);
         if (product == null)
             return NotFound();
         
@@ -62,7 +62,7 @@ public class ProductsController : ControllerBase
     [HttpDelete("{id}")]
     public IActionResult Delete(int id)
     {
-        var product = _products.Find(x => x.Id == id);
+        var product = _products.Find(x => x.id == id);
         if (product == null) return NotFound();
         _products.Remove(product);
         return Ok();
