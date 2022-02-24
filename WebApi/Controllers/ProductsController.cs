@@ -12,7 +12,11 @@ public class ProductsController : ControllerBase
     private List<Product> _products = new List<Product>
     {
         new Product { id = 1, name = "Milo" },
-        new Product { id = 2, name = "Tim Tams" }
+        new Product { id = 2, name = "Bart Simpson" },
+        new Product { id = 3, name = "Em Brogan", priority=1, sold=false },
+        new Product { id = 4, name = "Jeff CB", description="Something" },
+        new Product { id = 5, name = "Captain Morgan", price =1000, description="Something else!" },
+        new Product { id = 6, name = "Tim Tams" }
     };
 
     [HttpGet]
@@ -54,7 +58,7 @@ public class ProductsController : ControllerBase
         var product = _products.Find(x => x.id == id);
         if (product == null)
             return NotFound();
-        
+
         patch.ApplyTo(product);
         return Ok(product);
     }
