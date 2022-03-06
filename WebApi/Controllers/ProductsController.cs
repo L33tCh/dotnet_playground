@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using WebApi.Entities;
 using Microsoft.AspNetCore.JsonPatch;
+using WebApi.Helpers;
 
 [ApiController]
 [Route("[controller]")]
 public class ProductsController : ControllerBase
 {
+    private readonly DataContext _context;
     private List<Product> _products = new List<Product>
     {
         new Product { id = 1, name = "Milo" },
@@ -19,10 +21,15 @@ public class ProductsController : ControllerBase
         new Product { id = 6, name = "Tim Tams" }
     };
 
+    public ProductsController(DataContext context) {
+        _context = context;
+    }
+
     [HttpGet]
     public IActionResult GetAll()
     {
-        return Ok(_products);
+        var products = _context.Products;
+        return Ok(products.Count() > 0 ? products : _products);
     }
 
     [HttpGet("{id}")]
